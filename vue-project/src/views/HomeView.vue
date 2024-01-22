@@ -4,7 +4,7 @@
 <template>
   <main>
     <img class="landing-img" src="@/assets/RE4wppc.jpg" alt="" />
-    <a class="explore-btn" href="weather.html">
+    <RouterLink class="explore-btn" to="/weather">
       <span class="the-arrow -left">
         <span class="shaft"></span>
       </span>
@@ -14,6 +14,6 @@
           <span class="shaft"></span>
         </span>
       </span>
-    </a>
+    </RouterLink>
   </main>
 </template>
