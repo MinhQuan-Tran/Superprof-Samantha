@@ -2,7 +2,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["@shoelace-style/shoelace/dist/types/vue"]
   },
   "exclude": ["node_modules", "dist"]
 }
