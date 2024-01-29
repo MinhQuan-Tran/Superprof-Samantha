@@ -2,6 +2,7 @@
 import NavBar from './components/NavBar.vue';
 import HomeView from './views/HomeView.vue';
 import WeatherView from './views/WeatherView.vue';
+import FamilyFriendlyTrailsView from './views/FamilyFriendlyTrailsView.vue';
 import EasyTrailsView from './views/EasyTrailsView.vue';
 import ModerateTrailsView from './views/ModerateTrailsView.vue';
 import ExpertTrailsView from './views/ExpertTrailsView.vue';
@@ -24,11 +25,10 @@ onMounted(() => {
       pin: true,
       scrub: 1,
       snap: 1 / (mains.length - 1),
+      end: () => "+=" + document.querySelector('#app').offsetWidth,
     },
     xPercent: -100 * (mains.length - 1),
-    duration: 1,
-    ease: 'none',
-    end: () => "+=" + document.querySelector('#app').offsetWidth,
+    ease: "none",
   });
 });
 </script>
@@ -36,6 +36,7 @@ onMounted(() => {
 <template>
   <HomeView></HomeView>
   <WeatherView></WeatherView>
+  <FamilyFriendlyTrailsView></FamilyFriendlyTrailsView>
   <EasyTrailsView></EasyTrailsView>
   <ModerateTrailsView></ModerateTrailsView>
   <ExpertTrailsView></ExpertTrailsView>

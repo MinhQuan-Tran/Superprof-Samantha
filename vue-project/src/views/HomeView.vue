@@ -3,7 +3,7 @@
 
 <template>
   <main>
-    <img class="landing-img" src="@/assets/landing-page.png" alt="" />
+    <img class="landing-img" src="/landing-page.png" alt="" />
     <RouterLink class="explore-btn" to="/weather">
       <span class="the-arrow -left">
         <span class="shaft"></span>
