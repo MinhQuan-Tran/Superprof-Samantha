@@ -1,12 +1,16 @@
 :root {
   --left-shaft-width: 64px;
   --arrow-width: 8px;
+
+  scrollbar-width: none;
+
+  font-family: Apple Garamond;
+  font-size: small;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: Apple Garamond;
   overflow-x: hidden;
 }
 
@@ -19,6 +23,11 @@ body {
 }
 
 main {
-  display: inline-block;
+  display: block;
   width: 100dvw;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.5rem;
 }

@@ -4,7 +4,7 @@ import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onMounted, reactive } from 'vue';
+import { onMounted, watch, reactive } from 'vue';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,17 +19,183 @@ const weather = reactive({
   daily: [],
 });
 
+const props = defineProps({
+  containerAnimation: {
+    type: Object,
+    required: true,
+  },
+});
+
 function weatherIconURL(is_day, weather_code) {
+  // if (is_day) {
+  //   switch (weather_code) {
+  //     case 0: // Clear sky
+  //       return 'Ellipse 30.svg';
+  //     case 1: // Mainly clear
+  //       return 'Group 1-1.svg';
+  //     case 2: // Partly cloudy
+  //       return 'Group 2.svg';
+  //     case 3: // Overcast
+  //       return 'Group 1.svg';
+  //     case 45: // Fog
+  //     case 48:
+  //       return 'Group 1233.svg';
+  //     case 51: // Drizzle
+  //     case 53:
+  //     case 55:
+  //       return 'Group 12.svg';
+  //     case 56: // Freezing Drizzle
+  //     case 57:
+  //       return 'Group 12-1.svg';
+  //     case 61: // Rain
+  //     case 63:
+  //     case 65:
+  //       return "Group 14.svg";
+  //     case 66: // Freezing Rain
+  //     case 67:
+  //       return "Group 14-1.svg";
+  //     case 71: // Snow
+  //     case 73:
+  //     case 75:
+  //     case 77: // Snow Grains
+  //       return "snow.svg";
+  //     case 80: // Rain showers
+  //     case 81:
+  //     case 82:
+  //       return "Group 11-1.svg";
+  //     case 85: // Snow showers
+  //     case 86:
+  //       return "Group 7.svg";
+  //     case 95: // Thunderstorm
+  //       return "Vector 15.svg";
+  //   }
+  // } else {
+  //   switch (weather_code) {
+  //     case 0: // Clear sky
+  //       return 'Group 1214.svg';
+  //     case 1: // Mainly clear
+  //       return 'Group 2-2.svg';
+  //     case 2: // Partly cloudy
+  //       return 'Group 6.svg';
+  //     case 3: // Overcast
+  //       return 'Group 1.svg';
+  //     case 45: // Fog
+  //     case 48:
+  //       return 'Group 1234.svg';
+  //     case 51: // Drizzle
+  //     case 53:
+  //     case 55:
+  //       return 'Group 12.svg';
+  //     case 56: // Freezing Drizzle
+  //     case 57:
+  //       return 'Group 12-1.svg';
+  //     case 61: // Rain
+  //     case 63:
+  //     case 65:
+  //       return "Group 14.svg";
+  //     case 66: // Freezing Rain
+  //     case 67:
+  //       return "Group 14-1.svg";
+  //     case 71: // Snow
+  //     case 73:
+  //     case 75:
+  //     case 77: // Snow Grains
+  //       return "snow.svg";
+  //     case 80: // Rain showers
+  //     case 81:
+  //     case 82:
+  //       return "Group 11-1.svg";
+  //     case 85: // Snow showers
+  //     case 86:
+  //       return "Group 7.svg";
+  //     case 95: // Thunderstorm
+  //       return "Vector 15.svg";
+  //   }
+  // }
+
   if (is_day) {
     switch (weather_code) {
-      case 0:
-        return '3D Ico_33.svg';
-      case 1:
-        return '3D Ico_04.svg';
-      case 2:
-        return '3D Ico_04.svg';
-      case 3:
-        return '3D Ico_01.svg';
+      case 0: // Clear sky
+        return 'clear-day.svg';
+      case 1: // Mainly clear
+        return 'cloudy-1-day.svg';
+      case 2: // Partly cloudy
+        return 'cloudy-2-day.svg';
+      case 3: // Overcast
+        return 'cloudy-3-day.svg';
+      case 45: // Fog
+      case 48:
+        return 'fog-day.svg';
+      case 51: // Drizzle
+      case 53:
+      case 55:
+        return 'rainy-1-day.svg';
+      case 56: // Freezing Drizzle
+      case 57:
+        return 'rainy-1-day.svg';
+      case 61: // Rain
+      case 63:
+      case 65:
+        return 'rainy-2-day.svg';
+      case 66: // Freezing Rain
+      case 67:
+        return 'rainy-2-day.svg';
+      case 71: // Snow
+      case 73:
+      case 75:
+      case 77: // Snow Grains
+        return "snowy-1-day.svg";
+      case 80: // Rain showers
+      case 81:
+      case 82:
+        return 'rainy-3-day.svg';
+      case 85: // Snow showers
+      case 86:
+        return "snowy-3-day.svg";
+      case 95: // Thunderstorm
+        return "scattered-thunderstorms-day.svg";
+    }
+  } else {
+    switch (weather_code) {
+      case 0: // Clear sky
+        return 'clear-night.svg';
+      case 1: // Mainly clear
+        return 'cloudy-1-night.svg';
+      case 2: // Partly cloudy
+        return 'cloudy-2-night.svg';
+      case 3: // Overcast
+        return 'cloudy-3-night.svg';
+      case 45: // Fog
+      case 48:
+        return 'fog-night.svg';
+      case 51: // Drizzle
+      case 53:
+      case 55:
+        return 'rainy-1-night.svg';
+      case 56: // Freezing Drizzle
+      case 57:
+        return 'rainy-1-night.svg';
+      case 61: // Rain
+      case 63:
+      case 65:
+        return 'rainy-2-night.svg';
+      case 66: // Freezing Rain
+      case 67:
+        return 'rainy-2-night.svg';
+      case 71: // Snow
+      case 73:
+      case 75:
+      case 77: // Snow Grains
+        return "snowy-1-night.svg";
+      case 80: // Rain showers
+      case 81:
+      case 82:
+        return 'rainy-3-night.svg';
+      case 85: // Snow showers
+      case 86:
+        return "snowy-3-night.svg";
+      case 95: // Thunderstorm
+        return "scattered-thunderstorms-night.svg";
     }
   }
 
@@ -41,63 +207,64 @@ function formatTemp(temp_C) {
   return Math.round(temp);
 }
 
-onMounted(() => {
-  gsap.to('.background', {
+watch(() => props.containerAnimation, (scrollTween) => {
+  gsap.set('#weather .blobs', {
+    rotation: 0,
+    xPercent: -50,
+    yPercent: -50,
+  });
+  gsap.to('#weather .blobs', {
     scrollTrigger: {
-      trigger: '.background',
+      trigger: '#weather .blobs',
       scrub: 1,
-      start: 'top top',
-      end: 'bottom bottom',
+      containerAnimation: scrollTween,
+      start: 'center 200%',
+      end: 'center -100%',
+      // markers: true,
     },
     rotation: 360,
   });
+});
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(() => {
-      fetch(`https://api.open-meteo.com/v1/forecast?` +
-        `latitude=33.873415&` +
-        `longitude=-115.9009923&` +
-        `current=temperature_2m,precipitation,relative_humidity_2m,wind_speed_10m,weather_code,is_day&` +
-        `daily=weather_code,temperature_2m_max,temperature_2m_min&` +
-        `timezone=${Intl.DateTimeFormat().resolvedOptions().timeZone}`).then((response) => {
-          return response.json();
-        }).then((data) => {
-          console.log(data);
+onMounted(() => {
+  fetch(`https://api.open-meteo.com/v1/forecast?` +
+    `latitude=33.873415&` +
+    `longitude=-115.9009923&` +
+    `current=temperature_2m,precipitation,relative_humidity_2m,wind_speed_10m,weather_code,is_day&` +
+    `daily=weather_code,temperature_2m_max,temperature_2m_min&` +
+    `timezone=${Intl.DateTimeFormat().resolvedOptions().timeZone}`).then((response) => {
+      return response.json();
+    }).then((data) => {
+      weather.temp = data.current.temperature_2m;
+      weather.precipitation = data.current.precipitation;
+      weather.humidity = data.current.relative_humidity_2m;
+      weather.wind_speed = data.current.wind_speed_10m;
+      weather.weather_code = data.current.weather_code;
+      weather.is_day = data.current.is_day;
 
-          weather.temp = data.current.temperature_2m;
-          weather.precipitation = data.current.precipitation;
-          weather.humidity = data.current.relative_humidity_2m;
-          weather.wind_speed = data.current.wind_speed_10m;
-          weather.weather_code = data.current.weather_code;
-          weather.is_day = data.current.is_day;
+      for (let i = 0; i < data.daily.time.length; i++) {
+        const day = {
+          date: new Date(data.daily.time[i]),
+          weather_code: data.daily.weather_code[i],
+          temp_max: data.daily.temperature_2m_max[i],
+          temp_min: data.daily.temperature_2m_min[i]
+        };
 
-          for (let i = 0; i < data.daily.time.length; i++) {
-            const day = {
-              date: new Date(data.daily.time[i]),
-              weather_code: data.daily.weather_code[i],
-              temp_max: data.daily.temperature_2m_max[i],
-              temp_min: data.daily.temperature_2m_min[i]
-            };
-
-            weather.daily.push(day);
-          }
-        });
+        weather.daily.push(day);
+      }
     });
-
-  } else {
-    console.log("Geolocation is not supported by this browser.");
-  }
 
 });
 </script>
 
 <template>
-  <main>
+  <main id="weather">
     <div class="content">
-      <div class="background">
-        <img style="--order: 1" src="@/assets/blob.svg" alt="blob">
-        <img style="--order: 2" src="@/assets/blob.svg" alt="blob">
-        <img style="--order: 3" src="@/assets/blob.svg" alt="blob">
+      <div class="blobs">
+        <img style="--order: 1; --filter: opacity(0.7);" src="@/assets/blob.svg" alt="blob">
+        <img style="--order: 2; --filter: opacity(0.3);" src="@/assets/blob.svg" alt="blob">
+        <img style="--order: 3;" src="@/assets/blob.svg" alt="blob">
+        <div></div>
       </div>
 
       <h1 class="title">Joshua Tree National Park</h1>
@@ -111,7 +278,7 @@ onMounted(() => {
         </div>
 
         <div class="others">
-          <img :src="'/Weather Icons/' + weatherIconURL(weather.is_day, weather.weather_code)" alt="">
+          <img :src="'/weather-icons/animated/' + weatherIconURL(weather.is_day, weather.weather_code)" alt="">
           <span>Precipitation: {{ weather.precipitation }}%</span>
           <span>Humidity: {{ weather.humidity }}%</span>
           <span>Wind: {{ weather.wind_speed }} km/h</span>
@@ -121,7 +288,7 @@ onMounted(() => {
       <div class="daily-weather">
         <div v-for="(day, index) in weather.daily" :key="index" class="weather">
           <span class="day">{{ day.date.toLocaleDateString(undefined, { weekday: 'short' }) }}</span>
-          <img :src="'/Weather Icons/' + weatherIconURL(true, day.weather_code)" alt="">
+          <img :src="'/weather-icons/animated/' + weatherIconURL(true, day.weather_code)" alt="">
           <div class="temp">
             <span class="max">{{ formatTemp(day.temp_max) }}º</span>
             <span class="min">{{ formatTemp(day.temp_min) }}º</span>
@@ -134,10 +301,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-main {
-  position: relative;
-}
-
 .content {
   width: fit-content;
   position: absolute;
@@ -153,28 +316,35 @@ main {
   flex: 1;
 }
 
-.background {
+.blobs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   z-index: -1;
+  will-change: transform;
+  transform-origin: center center;
 }
 
-.background img {
-  filter: sepia(calc(100% / var(--order)));
+.blobs img {
+  filter: var(--filter);
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  height: 200vh;
+  width: 200vh;
   object-fit: contain;
   z-index: -1;
   transform-origin: center center;
-  animation: rotate calc(60s * var(--order)) linear infinite;
+  animation: rotate 60s linear infinite;
 }
 
 @keyframes rotate {
   0% {
-    transform: scale(3.5) rotate(calc(var(--order) * 90deg));
+    transform: translate(-50%, -50%) rotate(calc(var(--order) * 90deg));
   }
 
   100% {
-    transform: scale(3.5) rotate(calc(1turn * var(--order)));
+    transform: translate(-50%, -50%) rotate(1.5turn);
   }
 }
 
@@ -188,6 +358,12 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.current-weather img,
+.daily-weather img {
+  width: 100%;
+  height: 100%;
 }
 
 .temp {

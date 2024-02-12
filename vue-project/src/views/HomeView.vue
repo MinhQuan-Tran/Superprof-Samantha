@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main>
+  <main id="home">
     <img class="landing-img" src="/landing-page.png" alt="" />
     <RouterLink class="explore-btn" to="/weather">
       <span class="the-arrow -left">

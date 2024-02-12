@@ -7,7 +7,7 @@ import { RouterLink } from 'vue-router';
 
 <template>
     <nav>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/home">Home</RouterLink>
         <RouterLink to="/weather">Weather</RouterLink>
         <RouterLink to="/family-friendly-trails">Family-friendly Trails</RouterLink>
         <RouterLink to="/easy-trails">Easy Trails</RouterLink>
@@ -28,7 +28,7 @@ nav {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    height: 4em;
+    height: 4rem;
     font-weight: lighter;
 }
 
