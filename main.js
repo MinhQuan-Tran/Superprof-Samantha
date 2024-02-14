@@ -55,6 +55,45 @@ gsap.utils.toArray("a[href^='#']").forEach((el) => {
   });
 });
 
+// Home
+const divA = document.querySelector("#home .title");
+const divB = document.querySelector("#home .joshua-tree");
+const connector = document.querySelector("#home #connector");
+
+var drawConnector = function () {
+  var posnA = {
+    x: divA.offsetLeft + divA.offsetWidth,
+    y: divA.offsetTop + divA.offsetHeight / 2
+  };
+  var posnB = {
+    x: divB.offsetLeft,
+    y: divB.offsetTop + divA.offsetHeight / 2
+  };
+  var dStr =
+    "M" +
+    posnA.x +
+    "," +
+    posnA.y +
+    " " +
+    "C" +
+    (posnA.x + 200) +
+    "," +
+    posnA.y +
+    " " +
+    (posnB.x - 400) +
+    "," +
+    posnB.y +
+    " " +
+    posnB.x +
+    "," +
+    posnB.y;
+  connector.setAttribute("d", dStr);
+};
+
+window.addEventListener("resize", drawConnector);
+
+drawConnector();
+
 // Weather
 gsap.set("#weather .blobs", {
   rotation: 0,
@@ -158,7 +197,14 @@ function updateWeatherDaily() {
 
   for (let i = 0; i < weather.daily.length; i++) {
     const day = weather.daily[i];
-    const dayElement = document.createElement("div");
+    const dayElement = document.createElement("sl-tooltip");
+    dayElement.setAttribute(
+      "content",
+      `Avg Temp: ${formatTemp(
+        (day.temp_C_max + day.temp_C_min) / 2,
+        temp_unit
+      )}º${temp_unit}`
+    );
     dayElement.classList.add("day");
     dayElement.innerHTML = `
             <div class="date">${day.date.toLocaleDateString(undefined, {
@@ -271,6 +317,90 @@ function weatherIconURL(is_day, weather_code) {
 
   return null;
 }
+
+function formatDate(date) {
+  var month = "" + (date.getMonth() + 1),
+    day = "" + date.getDate(),
+    year = date.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
+
+document
+  .querySelector("#weather #monthly-forecast-btn")
+  .addEventListener("click", () => {
+    const today = new Date();
+    const startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    fetch(
+      `https://api.open-meteo.com/v1/forecast?` +
+        `latitude=33.873415&` +
+        `longitude=-115.9009923&` +
+        `&daily=weather_code,temperature_2m_max,temperature_2m_min&` +
+        `start_date=${formatDate(startDate)}&` +
+        `end_date=${formatDate(endDate)}`
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        document.querySelector("#weather #monthly-weather").innerHTML = "";
+
+        document.querySelector("#weather #monthly-weather").setAttribute(
+          "label",
+          "Monthly Forecast - " +
+            today.toLocaleString("default", {
+              month: "long",
+              year: "numeric"
+            })
+        );
+
+        for (let i = 0; i < data.daily.time.length; i++) {
+          const dayElement = document.createElement("sl-tooltip");
+          dayElement.setAttribute(
+            "content",
+            `Avg Temp: ${formatTemp(
+              (data.daily.temperature_2m_max[i] +
+                data.daily.temperature_2m_min[i]) /
+                2,
+              temp_unit
+            )}º${temp_unit}`
+          );
+          dayElement.classList.add("day");
+          dayElement.innerHTML = `
+            <div class="date">${new Date(data.daily.time[i]).toLocaleDateString(
+              undefined,
+              {
+                weekday: "short",
+                day: "2-digit"
+              }
+            )}</div>
+            <img class="weather-icon" src="/images/weather-icons/animated/${weatherIconURL(
+              true,
+              data.daily.weather_code[i]
+            )}" alt="Weather icon">
+            <div class="temp">
+              <span class="max" id="daily-temp-max">
+                ${formatTemp(data.daily.temperature_2m_max[i], temp_unit)}º
+              </span>
+              <span class="min" id="daily-temp-min">
+                ${formatTemp(data.daily.temperature_2m_min[i], temp_unit)}º
+              </span>
+            </div>
+        `;
+
+          document
+            .querySelector("#weather #monthly-weather")
+            .appendChild(dayElement);
+        }
+      });
+
+    document.querySelector("#weather #monthly-weather").show();
+  });
 
 // Parallax scrolling transition
 const parallax_tl = gsap.timeline({

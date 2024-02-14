@@ -76,6 +76,29 @@ nav a.router-link-exact-active::after {
   gap: 1em;
 }
 
+#home .connector {
+  position: absolute;
+  pointer-events: none;
+}
+
+#home .title {
+  letter-spacing: 1rem;
+  font-weight: light;
+  margin: 0;
+}
+
+#home .joshua-tree {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 180px);
+  transform: translate(0, -50%);
+  font-size: xx-large;
+  font-style: italic;
+  font-weight: lighter;
+  letter-spacing: 1rem;
+  line-height: 1.5em;
+}
+
 #home .landing-img {
   width: 300px;
 }
@@ -296,7 +319,15 @@ nav a.router-link-exact-active::after {
   gap: 1rem;
 }
 
-#weather #daily-weather .day {
+#weather #monthly-weather::part(body) {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 1rem;
+  row-gap: 1.5rem;
+}
+
+#weather #daily-weather .day,
+#weather #monthly-weather .day {
   width: fit-content;
   display: flex;
   flex-direction: column;
@@ -304,11 +335,13 @@ nav a.router-link-exact-active::after {
   gap: 0.5rem;
 }
 
-#weather #daily-weather .day img {
+#weather #daily-weather .day img,
+#weather #monthly-weather .day img {
   width: 3rem;
 }
 
-#weather #daily-weather .temp {
+#weather #daily-weather .temp,
+#weather #monthly-weather .temp {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -316,7 +349,8 @@ nav a.router-link-exact-active::after {
   gap: 0.3rem;
 }
 
-#weather #daily-weather .temp .min {
+#weather #daily-weather .temp .min,
+#weather #monthly-weather .temp .min {
   opacity: 0.8;
   font-size: 0.8em;
 }
@@ -586,4 +620,32 @@ nav a.router-link-exact-active::after {
   height: 90%;
   width: 100%;
   --scroll-hint: 10%;
+}
+
+/* About Us */
+#about-us {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 4rem);
+  letter-spacing: 2px;
+  gap: 1rem;
+}
+
+#about-us img {
+  max-height: 90%;
+}
+
+#about-us .content {
+  font-size: larger;
+  max-width: 30em;
+  line-height: 2em;
+}
+
+#about-us a {
+  text-decoration: none;
+  color: black;
+  background-color: #faf5f0;
+  padding: 0.2em 0.5em;
 }

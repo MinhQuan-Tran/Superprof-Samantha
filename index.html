@@ -23,6 +23,16 @@
   <body>
     <div id="app">
       <main id="home">
+        <svg
+          class="connector"
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+        >
+          <path id="connector" fill="none" stroke="black" stroke-width="1" />
+        </svg>
+        <h1 class="title">Trailscapes</h1>
+        <span class="joshua-tree">Joshua<br />Tree</span>
         <img class="landing-img" src="/images/landing-page.png" alt="" />
         <a class="explore-btn" href="#weather">
           <span class="the-arrow -left">
@@ -59,9 +69,9 @@
 
           <div class="current-weather">
             <div class="temp">
-              <span class="value" id="temp-value"
-                >{{ formatTemp(weather.temp) }}</span
-              >
+              <span class="value" id="temp-value">
+                {{ formatTemp(weather.temp) }}
+              </span>
               ℃
               <sl-switch id="temp-toggle"> ℉ </sl-switch>
             </div>
@@ -101,8 +111,10 @@
             </div>
           </div> -->
           </div>
-          <sl-button>Monthly Forecast</sl-button>
+          <sl-button id="monthly-forecast-btn">Monthly Forecast</sl-button>
         </div>
+
+        <sl-dialog label="Monthly Forecast" id="monthly-weather"></sl-dialog>
       </main>
 
       <main id="parallax-scrolling-transition">
@@ -169,6 +181,26 @@
 
       <main id="gallery">
         <sl-carousel mouse-dragging navigation></sl-carousel>
+      </main>
+
+      <main id="about-us">
+        <img src="/images/Image20240214181524.png" alt="" />
+        <div class="content">
+          <h1>About</h1>
+          <p>
+            Trailscapes is your global companion for the very best hiking
+            experiences. At Trailscapes, we understand that the journey is just
+            as important as the destination. <br />
+            <br />
+            Whether you seek the mesmerising landscapes of Joshua Tree,
+            enchanting forests of Japan, or the rugged terrains of Patagonia,
+            our platform is your gateway to discovering trails that suit every
+            preference.
+          </p>
+          <a href="https://www.nps.gov/jotr/index.htm" target="_blank">
+            Link to National Park Service
+          </a>
+        </div>
       </main>
 
       <nav>
