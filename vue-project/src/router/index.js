@@ -85,18 +85,15 @@ function getScrollLookup(targets, containerAnimation, position) {
 }
 
 const waitForContainerAnimation = setInterval(() => {
-  for (let i = 0; i < 50; i++) {
-    if (store.state.containerAnimation) {
-      const getPosition = getScrollLookup('main', store.state.containerAnimation, 'center center')
+  if (store.state.containerAnimation) {
+    const getPosition = getScrollLookup('main', store.state.containerAnimation, 'center center')
 
-      // Horizontal scrollTo (not an actual router navigation)
-      router.afterEach((to) => {
-        gsap.to(window, { duration: 2, scrollTo: getPosition('#' + to.name) })
-      })
+    // Horizontal scrollTo (not an actual router navigation)
+    router.afterEach((to) => {
+      gsap.to(window, { duration: 2, scrollTo: getPosition('#' + to.name) })
+    })
 
-      clearInterval(waitForContainerAnimation)
-      break
-    }
+    clearInterval(waitForContainerAnimation)
   }
 }, 100)
 

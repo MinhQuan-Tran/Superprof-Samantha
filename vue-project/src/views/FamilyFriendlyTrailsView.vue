@@ -123,7 +123,6 @@ const trails = ref([
 const trailGroup = ref(null);
 
 function openDetails(index) {
-
     this.trails.map((trail) => {
         trail.openDetails = false;
     });
@@ -159,6 +158,7 @@ function openDetails(index) {
 
 .group {
     flex: 1;
+    height: 50%;
     position: relative;
     display: flex;
     flex-direction: row;

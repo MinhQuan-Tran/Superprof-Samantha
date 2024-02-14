@@ -9,7 +9,7 @@ import { ref } from 'vue';
 const trails = ref([
     {
         openDetails: false,
-        name: 'Ryan  Mountain',
+        name: 'Ryan Mountain',
         level: 'Moderate',
         length: '4.7km',
         elevation: '324m',
@@ -156,6 +156,7 @@ function openDetails(index) {
 
 .group {
     flex: 1;
+    height: 50%;
     position: relative;
     display: flex;
     flex-direction: row;

@@ -253,7 +253,6 @@ onMounted(() => {
         weather.daily.push(day);
       }
     });
-
 });
 </script>
 
