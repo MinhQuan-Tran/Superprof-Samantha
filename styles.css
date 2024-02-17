@@ -8,10 +8,17 @@
   font-size: small;
 }
 
+html {
+  overflow-y: scroll;
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  position: relative;
+  height: unset;
 }
 
 #app {
@@ -20,10 +27,13 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  position: relative;
 }
 
 main {
   display: block;
+  height: calc(100% - 4rem);
+  /* 4rem is nav height */
   width: 100dvw;
 }
 
@@ -37,13 +47,19 @@ nav {
   position: fixed;
   bottom: 0;
   width: 100dvw;
-  height: fit-content;
+  height: 4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  height: 4rem;
+  gap: 0.5rem;
   font-weight: lighter;
+}
+
+@media only screen and (max-width: 768px) {
+  nav {
+    font-size: smaller;
+  }
 }
 
 nav a {
@@ -97,6 +113,18 @@ nav a.router-link-exact-active::after {
   font-weight: lighter;
   letter-spacing: 1rem;
   line-height: 1.5em;
+}
+
+@media only screen and (max-width: 768px) {
+  #home .joshua-tree {
+    position: static;
+    transform: none;
+    font-size: large;
+  }
+
+  #home .joshua-tree br {
+    display: none;
+  }
 }
 
 #home .landing-img {
@@ -228,6 +256,14 @@ nav a.router-link-exact-active::after {
   align-items: stretch;
 }
 
+@media only screen and (max-width: 768px) {
+  #weather .content {
+    width: 90%;
+    left: 50%;
+    align-items: center;
+  }
+}
+
 #weather .content > * {
   flex: 1;
 }
@@ -239,6 +275,7 @@ nav a.router-link-exact-active::after {
   z-index: -1;
   will-change: transform;
   transform-origin: center center;
+  pointer-events: none;
 }
 
 #weather .blobs img {
@@ -247,7 +284,8 @@ nav a.router-link-exact-active::after {
   top: 50%;
   left: 50%;
   height: 200vh;
-  width: 200vh;
+  max-width: 130vw;
+  aspect-ratio: 1 / 1;
   object-fit: contain;
   z-index: -1;
   transform-origin: center center;
@@ -385,6 +423,13 @@ nav a.router-link-exact-active::after {
   font-size: xx-large;
 }
 
+@media only screen and (max-width: 768px) {
+  #parallax-scrolling-transition #are-you,
+  #parallax-scrolling-transition #ready-for-adventure {
+    font-size: large;
+  }
+}
+
 #parallax-scrolling-transition #are-you {
   top: 40%;
   left: 30%;
@@ -396,8 +441,18 @@ nav a.router-link-exact-active::after {
   left: 0;
 }
 
-/* family-friendly-trails-transition */
-#family-friendly-trails-transition .content {
+#parallax-scrolling-transition #ready-for-adventure br {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  #parallax-scrolling-transition #ready-for-adventure br {
+    display: block;
+  }
+}
+
+/* Transitions */
+.transition .content {
   width: fit-content;
   position: absolute;
   top: 50%;
@@ -405,19 +460,21 @@ nav a.router-link-exact-active::after {
   transform: translate(50%, -50%);
 }
 
-#family-friendly-trails-transition .blobs {
+.transition .blobs {
   position: absolute;
   top: 50%;
   left: 50%;
   z-index: -1;
+  pointer-events: none;
 }
 
-#family-friendly-trails-transition .blobs img {
+.transition .blobs img {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 1000px;
-  height: 1000px;
+  max-width: 165vw;
+  aspect-ratio: 1 / 1;
   filter: var(--filter);
   object-fit: contain;
   z-index: -1;
@@ -425,14 +482,15 @@ nav a.router-link-exact-active::after {
   transform: translate(-54%, -50%) rotate(110deg);
 }
 
-#family-friendly-trails-transition .description {
+.transition .description {
   position: relative;
   z-index: 1;
-  width: 530px;
+  max-width: 530px;
+  max-width: 90%;
   letter-spacing: 2.6px;
 }
 
-#family-friendly-trails-transition #family-friendly {
+.transition .text {
   position: absolute;
   top: 20%;
   left: 80%;
@@ -443,13 +501,22 @@ nav a.router-link-exact-active::after {
   text-wrap: nowrap;
 }
 
+@media only screen and (max-width: 768px) {
+  .transition .blobs img {
+    transform: translate(-58%, -49%) rotate(110deg);
+  }
+
+  .transition .text {
+    left: 50%;
+  }
+}
+
 /* Trails */
 #family-friendly-trails .content,
 #easy-trails .content,
 #moderate-trails .content,
 #expert-trails .content {
-  height: calc(100% - 4rem);
-  /* 4rem is navbar height */
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -470,6 +537,7 @@ nav a.router-link-exact-active::after {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  transition: all 0.3s;
 }
 
 #family-friendly-trails sl-details,
@@ -555,6 +623,29 @@ nav a.router-link-exact-active::after {
   /* transition when opening */
 }
 
+@media only screen and (max-width: 768px) {
+  #family-friendly-trails .group:has(sl-details[open]),
+  #easy-trails .group:has(sl-details[open]),
+  #moderate-trails .group:has(sl-details[open]),
+  #expert-trails .group:has(sl-details[open]) {
+    gap: 0;
+  }
+
+  #family-friendly-trails sl-details::part(content),
+  #easy-trails sl-details::part(content),
+  #moderate-trails sl-details::part(content),
+  #expert-trails sl-details::part(content) {
+    width: 100dvw;
+  }
+
+  #family-friendly-trails sl-details[open],
+  #easy-trails sl-details[open],
+  #moderate-trails sl-details[open],
+  #expert-trails sl-details[open] {
+    padding-right: 100dvw;
+  }
+}
+
 #family-friendly-trails .close-btn,
 #easy-trails .close-btn,
 #moderate-trails .close-btn,
@@ -613,7 +704,6 @@ nav a.router-link-exact-active::after {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100% - 4rem);
 }
 
 #gallery sl-carousel {
@@ -622,25 +712,41 @@ nav a.router-link-exact-active::after {
   --scroll-hint: 10%;
 }
 
+#gallery sl-carousel::part(base) {
+  gap: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  #gallery sl-carousel {
+    --scroll-hint: 0;
+  }
+}
+
 /* About Us */
 #about-us {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: calc(100% - 4rem);
   letter-spacing: 2px;
   gap: 1rem;
 }
 
 #about-us img {
   max-height: 90%;
+  max-width: 50%;
 }
 
 #about-us .content {
   font-size: larger;
   max-width: 30em;
   line-height: 2em;
+}
+
+@media only screen and (max-width: 768px) {
+  #about-us .content {
+    font-size: small;
+  }
 }
 
 #about-us a {

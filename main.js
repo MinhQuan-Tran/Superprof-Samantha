@@ -47,6 +47,9 @@ const getPosition = getScrollLookup("main", scrollTween, "center center");
 gsap.utils.toArray("a[href^='#']").forEach((el) => {
   el.addEventListener("click", (e) => {
     e.preventDefault();
+
+    console.log(getPosition(el.getAttribute("href")));
+
     gsap.to(window, {
       scrollTo: getPosition(el.getAttribute("href")),
       overwrite: "auto",
@@ -80,7 +83,7 @@ var drawConnector = function () {
     "," +
     posnA.y +
     " " +
-    (posnB.x - 400) +
+    (posnB.x - 350) +
     "," +
     posnB.y +
     " " +
@@ -991,6 +994,40 @@ document.querySelectorAll(".close-btn").forEach((closeBtn) =>
     closeBtn.closest("sl-details").removeAttribute("open");
   })
 );
+
+const levels = ["family-friendly", "easy", "moderate", "expert"];
+
+levels.forEach((level) => {
+  const transition = `#${level}-trails-transition`;
+  const text = `#${level}-trails-transition #${level}-text`;
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: transition,
+      containerAnimation: scrollTween,
+      scrub: 1,
+      start: "left right",
+      end: "right left"
+    }
+  });
+
+  tl.fromTo(
+    text,
+    {
+      xPercent: 200
+    },
+    {
+      xPercent: -300,
+      ease: "none"
+    }
+  );
+});
+// Progress: 50%
+// => xPercent: -50 (make element centered)
+// => if start xPercent: 200
+// => half distance from start to end: 200 - -50 = 250
+// => full distance from start to end: 250 * 2 = 500
+// => end xPercent: 200 - 500 = -300
 
 // Gallery
 const galleryList = document.querySelector("#gallery sl-carousel");
