@@ -34,6 +34,12 @@ function getScrollLookup(targets, containerAnimation, position) {
     let t = gsap.utils.toArray(target)[0],
       i = triggers.length;
     while (i-- && triggers[i].trigger !== t) {}
+    console.log(
+      st.start,
+      triggers[i].start,
+      containerAnimation.duration(),
+      st.end - st.start
+    );
     return i >= 0
       ? st.start +
           (triggers[i].start / containerAnimation.duration()) *
@@ -63,6 +69,8 @@ const divA = document.querySelector("#home .title");
 const divB = document.querySelector("#home .joshua-tree");
 const connector = document.querySelector("#home #connector");
 
+// Draw the connector between the title and the Joshua Tree text
+// https://stackoverflow.com/a/36995443
 var drawConnector = function () {
   var posnA = {
     x: divA.offsetLeft + divA.offsetWidth,
@@ -901,6 +909,7 @@ const moderateTrailsList = document.querySelector("#moderate-trails .group");
 
 const expertTrailsList = document.querySelector("#expert-trails .group");
 
+// Trail Card
 trails.forEach((trail) => {
   const trailElement = document.createElement("sl-details");
   trailElement.innerHTML =
@@ -979,6 +988,7 @@ trails.forEach((trail) => {
   }
 });
 
+// Prevent multiple Trail Cards from being open at the same time
 document.querySelectorAll(".group").forEach((group) => {
   group.addEventListener("sl-show", (event) => {
     if (event.target.localName === "sl-details") {
@@ -989,6 +999,7 @@ document.querySelectorAll(".group").forEach((group) => {
   });
 });
 
+// Close Trail Card
 document.querySelectorAll(".close-btn").forEach((closeBtn) =>
   closeBtn.addEventListener("click", () => {
     closeBtn.closest("sl-details").removeAttribute("open");
