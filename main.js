@@ -68,7 +68,7 @@ const connector = document.querySelector("#home #connector");
 
 // Draw the connector between the title and the Joshua Tree text
 // https://stackoverflow.com/a/36995443
-var drawConnector = function () {
+function drawConnector() {
   var posnA = {
     x: divA.offsetLeft + divA.offsetWidth,
     y: divA.offsetTop + divA.offsetHeight / 2
@@ -96,7 +96,7 @@ var drawConnector = function () {
     "," +
     posnB.y;
   connector.setAttribute("d", dStr);
-};
+}
 
 window.addEventListener("resize", drawConnector);
 
@@ -411,6 +411,7 @@ document
   });
 
 // Parallax scrolling transition
+// Pin the parallax scrolling transition section for 3 screens (end after Family-Friendly Trails Page passed)
 const parallax_tl = gsap.timeline({
   scrollTrigger: {
     trigger: "#parallax-scrolling-transition",
@@ -421,6 +422,7 @@ const parallax_tl = gsap.timeline({
   }
 });
 
+// Pin the animation container for 1 screen (stop the texts moving right after meeting the Family-Friendly Trails Transition Page)
 const fakePin = gsap.to("#parallax-scrolling-transition", {
   x: window.innerWidth,
   ease: "none"
@@ -1003,6 +1005,7 @@ document.querySelectorAll(".close-btn").forEach((closeBtn) =>
   })
 );
 
+// Trails Transition
 const levels = ["family-friendly", "easy", "moderate", "expert"];
 
 levels.forEach((level) => {

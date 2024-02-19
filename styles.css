@@ -702,8 +702,9 @@ nav a.router-link-exact-active::after {
 /* Gallery */
 #gallery {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
 }
 
 #gallery sl-carousel {
