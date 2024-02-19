@@ -458,6 +458,14 @@ nav a.router-link-exact-active::after {
   top: 50%;
   right: 30%;
   transform: translate(50%, -50%);
+  width: 530px;
+  max-width: 70%;
+}
+
+@media only screen and (max-width: 768px) {
+  .transition .content {
+    right: 40%;
+  }
 }
 
 .transition .blobs {
@@ -485,8 +493,6 @@ nav a.router-link-exact-active::after {
 .transition .description {
   position: relative;
   z-index: 1;
-  width: 530px;
-  max-width: 90%;
   letter-spacing: 2.6px;
 }
 
