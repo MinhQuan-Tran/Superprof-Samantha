@@ -22,7 +22,7 @@ body {
 }
 
 #app {
-  height: 100dvh;
+  height: 100lvh;
   width: fit-content;
   display: flex;
   flex-direction: row;
@@ -34,7 +34,7 @@ main {
   display: block;
   height: calc(100% - 4rem);
   /* 4rem is nav height */
-  width: 100dvw;
+  width: 100vw;
 }
 
 ul {
@@ -46,7 +46,7 @@ ul {
 nav {
   position: fixed;
   bottom: 0;
-  width: 100dvw;
+  width: 100vw;
   height: 4rem;
   display: flex;
   flex-direction: row;
@@ -472,20 +472,20 @@ nav a.router-link-exact-active::after {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 1000px;
+  width: 950px;
   max-width: 165vw;
   aspect-ratio: 1 / 1;
   filter: var(--filter);
   object-fit: contain;
   z-index: -1;
   transform-origin: center center;
-  transform: translate(-54%, -50%) rotate(110deg);
+  transform: translate(-56%, -50%) rotate(110deg);
 }
 
 .transition .description {
   position: relative;
   z-index: 1;
-  max-width: 530px;
+  width: 530px;
   max-width: 90%;
   letter-spacing: 2.6px;
 }

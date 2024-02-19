@@ -34,12 +34,6 @@ function getScrollLookup(targets, containerAnimation, position) {
     let t = gsap.utils.toArray(target)[0],
       i = triggers.length;
     while (i-- && triggers[i].trigger !== t) {}
-    console.log(
-      st.start,
-      triggers[i].start,
-      containerAnimation.duration(),
-      st.end - st.start
-    );
     return i >= 0
       ? st.start +
           (triggers[i].start / containerAnimation.duration()) *
@@ -54,10 +48,13 @@ gsap.utils.toArray("a[href^='#']").forEach((el) => {
   el.addEventListener("click", (e) => {
     e.preventDefault();
 
-    console.log(getPosition(el.getAttribute("href")));
-
     gsap.to(window, {
-      scrollTo: getPosition(el.getAttribute("href")),
+      scrollTo:
+        getPosition(e.target.getAttribute("href")) +
+        (window.scrollY > getPosition(e.target.getAttribute("href")) ? 1 : -1) *
+          20,
+      // Set the offset to 20px to prevent the scroll from being too close to the center of the section
+      // This is to prevent the scroll from going to the next section if the scrolling is too fast
       overwrite: "auto",
       duration: 1
     });
@@ -914,7 +911,7 @@ trails.forEach((trail) => {
   const trailElement = document.createElement("sl-details");
   trailElement.innerHTML =
     `
-        <img slot="summary" alt="${trail.name}" src="/images/${trail.name}.png" />
+        <img slot="summary" alt="${trail.name}" src="/images/${trail.name}.png" loading="lazy"/>
 
         <!-- Empty icons -->
         <div slot="expand-icon"></div>
@@ -1049,6 +1046,7 @@ for (let i = 1; i <= 12; i++) {
         <img
             src="/images/gallery/${i}.png"
             alt="${i}.png"
+            loading="lazy"
         />
     `;
   galleryList.appendChild(slide);
