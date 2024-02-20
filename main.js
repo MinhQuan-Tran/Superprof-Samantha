@@ -1,16 +1,16 @@
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-const mains = gsap.utils.toArray("main");
+const sections = gsap.utils.toArray("section");
 
-const scrollTween = gsap.to(mains, {
+const scrollTween = gsap.to(sections, {
   scrollTrigger: {
     trigger: "#app",
     pin: true,
     scrub: 1,
-    snap: 1 / (mains.length - 1),
+    snap: 1 / (sections.length - 1),
     end: () => "+=" + document.querySelector("#app").offsetWidth
   },
-  xPercent: -100 * (mains.length - 1),
+  xPercent: -100 * (sections.length - 1),
   ease: "none"
 });
 
@@ -42,7 +42,7 @@ function getScrollLookup(targets, containerAnimation, position) {
   };
 }
 
-const getPosition = getScrollLookup("main", scrollTween, "center center");
+const getPosition = getScrollLookup("section", scrollTween, "center center");
 
 gsap.utils.toArray("a[href^='#']").forEach((el) => {
   el.addEventListener("click", (e) => {

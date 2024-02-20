@@ -18,18 +18,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
     <link rel="stylesheet" href="styles.css" />
-    <script src="main.js" defer type="module"></script>
+    <script src="main.js" defer></script>
   </head>
   <body>
     <div id="app">
-      <main id="home">
+      <section id="home">
         <svg
           class="connector"
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
           height="100%"
         >
-          <path id="connector" fill="none" stroke="black" stroke-width="1" />
+          <path
+            id="connector"
+            fill="none"
+            stroke="black"
+            stroke-width="1"
+            d=""
+          />
         </svg>
         <h1 class="title">Trailscapes</h1>
         <img class="landing-img" src="/images/landing-page.png" alt="" />
@@ -48,9 +54,9 @@
             </span>
           </span>
         </a>
-      </main>
+      </section>
 
-      <main id="weather">
+      <section id="weather">
         <div class="content">
           <div class="blobs">
             <img
@@ -80,7 +86,11 @@
             </div>
 
             <div class="others">
-              <img id="weather-icon" />
+              <img
+                id="weather-icon"
+                src="/images/weather-icons/animated/clear-day.svg"
+                alt="Clear Day"
+              />
               <span
                 >Precipitation:
                 <span id="precipitation-value">{{ weather.precipitation }}</span
@@ -118,18 +128,18 @@
         </div>
 
         <sl-dialog label="Monthly Forecast" id="monthly-weather"></sl-dialog>
-      </main>
+      </section>
 
-      <main id="parallax-scrolling-transition">
+      <section id="parallax-scrolling-transition">
         <span id="are-you"> Are you </span>
 
         <span id="ready-for-adventure">
           Ready for <br />
           adventure?
         </span>
-      </main>
+      </section>
 
-      <main id="family-friendly-trails-transition" class="transition">
+      <section id="family-friendly-trails-transition" class="transition">
         <div class="content">
           <div class="blobs">
             <img
@@ -155,16 +165,16 @@
         </div>
 
         <span id="family-friendly-text" class="text">Family-friendly</span>
-      </main>
+      </section>
 
-      <main id="family-friendly-trails">
+      <section id="family-friendly-trails">
         <div class="content">
           <h1>Family-Friendly Trails</h1>
           <div class="group"></div>
         </div>
-      </main>
+      </section>
 
-      <main id="easy-trails-transition" class="transition">
+      <section id="easy-trails-transition" class="transition">
         <div class="content">
           <div class="blobs">
             <img
@@ -190,16 +200,16 @@
         </div>
 
         <span id="easy-text" class="text"> Easy Trails </span>
-      </main>
+      </section>
 
-      <main id="easy-trails">
+      <section id="easy-trails">
         <div class="content">
           <h1>Easy Trails</h1>
           <div class="group"></div>
         </div>
-      </main>
+      </section>
 
-      <main id="moderate-trails-transition" class="transition">
+      <section id="moderate-trails-transition" class="transition">
         <div class="content">
           <div class="blobs">
             <img
@@ -225,16 +235,16 @@
         </div>
 
         <span id="moderate-text" class="text"> Moderate Trails </span>
-      </main>
+      </section>
 
-      <main id="moderate-trails">
+      <section id="moderate-trails">
         <div class="content">
           <h1>Moderate Trails</h1>
           <div class="group"></div>
         </div>
-      </main>
+      </section>
 
-      <main id="expert-trails-transition" class="transition">
+      <section id="expert-trails-transition" class="transition">
         <div class="content">
           <div class="blobs">
             <img
@@ -260,21 +270,21 @@
         </div>
 
         <span id="expert-text" class="text"> Expert Trails </span>
-      </main>
+      </section>
 
-      <main id="expert-trails">
+      <section id="expert-trails">
         <div class="content">
           <h1>Expert Trails</h1>
           <div class="group"></div>
         </div>
-      </main>
+      </section>
 
-      <main id="gallery">
+      <section id="gallery">
         <h1>Gallery</h1>
         <sl-carousel mouse-dragging navigation></sl-carousel>
-      </main>
+      </section>
 
-      <main id="about-us">
+      <section id="about-us">
         <img src="/images/Image20240214181524.png" alt="" />
         <div class="content">
           <h1>About</h1>
@@ -292,7 +302,7 @@
             Link to National Park Service
           </a>
         </div>
-      </main>
+      </section>
 
       <nav>
         <a href="#home">Home</a>
